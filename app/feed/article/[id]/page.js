@@ -1,10 +1,42 @@
-/* eslint-disable react/no-unescaped-entities */
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ArticleDetails = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/article")
+      .then((res) => res.json())
+      .then((data) => {
+        setArticles(data);
+      });
+  }, []);
+
   return (
-    <div className="lg:space-y-6 my-10">
+    <>
+      {articles.map((item, idx) => (
+        <div key={idx} className="lg:space-y-6 my-10">
+          <h2 className="lg:text-3xl md:text-3xl text-2xl lg:font-bold ">
+            {item.title}
+          </h2>
+          <Image
+            src={"/image3.jpg"}
+            alt="blogs images"
+            width={5000}
+            height={5000}
+          />
+          <p>{item.content}</p>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default ArticleDetails;
+
+{
+  /* <div className="lg:space-y-6 my-10">
       <h2 className="lg:text-3xl md:text-3xl text-2xl lg:font-bold ">
         How to Return Results from a Python Function to Your Program When a
         Library is Blocking the Way
@@ -34,8 +66,5 @@ const ArticleDetails = () => {
         beginning, one or two of the solutions described, and the guidance near
         the end.
       </p>
-    </div>
-  );
-};
-
-export default ArticleDetails;
+    </div> */
+}

@@ -35,6 +35,15 @@ const allPosts = [
 ];
 
 const Post = () => {
+  // const [allPosts, setAllPosts] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/home")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setAllPosts(data);
+  //     });
+  // }, []);
+
   const [visiblePosts, setVisiblePosts] = useState(
     allPosts.map((post) => post.id)
   );

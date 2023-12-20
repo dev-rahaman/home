@@ -148,7 +148,7 @@ const LeftSidebar = () => {
 
   return (
     <ul
-      className={`left-sidebar w-[270px] p-4 pb-20 leading-6 h-screen overflow-x-auto custom-scrollbar ${
+      className={`mt-16 left-sidebar w-[270px] p-4 pb-20 leading-6 h-screen overflow-x-auto custom-scrollbar ${
         isHovered ? "show-scrollbar" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}
