@@ -116,3 +116,14 @@ tr:nth-child(even):hover {
   border: 1px solid #000;
   clip-path: polygon(0% 0%, 96% 0, 100% 50%, 96% 100%, 0% 100%);
 }
+
+.inlineContent p,
+.inlineContent div,
+.inlineContent h1,
+.inlineContent h2,
+.inlineContent h3,
+.inlineContent h4,
+.inlineContent h5,
+.inlineContent h6 {
+  display: inline;
+}

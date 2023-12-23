@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           <div className="fixed left-0">
             <LeftSidebar />
           </div>
-          <div className="mx-[270px] px-10">{children}</div>
+          <div className="mx-[270px] px-10 mt-10 pt-10">{children}</div>
           <div className="fixed right-0">
             <RightSidebar />
           </div>

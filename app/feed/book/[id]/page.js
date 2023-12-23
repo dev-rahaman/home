@@ -1,6 +1,20 @@
+"use client";
 import { DropdownTwoIcon, ReportIcon } from "@/app/icons/icons";
+import { useEffect, useState } from "react";
 
-const BookDetails = () => {
+const BookDetails = ({ params }) => {
+  const [books, seBooks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/book")
+      .then((res) => res.json())
+      .then((data) => {
+        seBooks(data);
+      });
+  }, []);
+
+  const findBook = books.find((item) => item._id === params.id);
+
   return (
     <>
       <div className="bg-white p-6 shadow-md flex mt-5">
@@ -36,12 +50,13 @@ const BookDetails = () => {
               className="w-[50px] rounded-full h-[50px] rounded"
             />
             <div className="text-gray-600 ">
-              <p>David Kadavy</p>
-              <p>10/20/2023</p>
+              <p>{findBook?.bookAuthor}</p>
+              <p>{findBook?.time}</p>
             </div>
           </div>
           <h2 className="text-[#4C4C4C] font-extrabold text-4xl mt-5">
-            Mind Management, Not Time Management By David Kadavy
+            {findBook?.bookName}
+            {/* {findBook?.bookTitle} */}
           </h2>
           <div className="flex gap-2 mt-20">
             <button className="bg-blue-700 p-2 text-white">Facebook</button>
@@ -56,19 +71,9 @@ const BookDetails = () => {
         <p className="font-bold uppercase text-[#4C4C4C] border-b-2">
           Description
         </p>
-        <p className="py-4">
-          In today’s fast-paced world, the pursuit of success often feels like a
-          race against time. We’re constantly bombarded with advice on how to
-          manage our time more effectively to achieve our goals. However, what
-          if the secret to true productivity and success lies not in time
-          management, but in something even more powerful—mind management? In
-          this article, we delve into the concept of mind management, explore
-          its benefits, and understand why it trumps traditional time
-          management. Let’s embark on this journey of self-discovery and
-          transformation.
-        </p>
+        <p className="py-4">{findBook?.bookDescription}</p>
         <p className="font-bold uppercase text-[#4C4C4C] border-b-2">
-          Detail of Mind Management not Time Management PDF
+          Detail of {findBook?.bookName}
         </p>
 
         <table className="w-full bg-white border border-gray-300 mt-5">
@@ -81,33 +86,37 @@ const BookDetails = () => {
           <tbody>
             <tr>
               <td className="py-2 px-4 border-b">Book Title</td>
-              <td className="py-2 px-4 border-b">
-                Mind Management not Time Management PDF
-              </td>
+              <td className="py-2 px-4 border-b">{findBook?.bookTitle}</td>
+            </tr>
+            <tr>
+              <td className="py-2 px-4 border-b">Price</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookPrice}</td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Number of Pages</td>
-              <td className="py-2 px-4 border-b">451</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookPages}</td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Author Name</td>
-              <td className="py-2 px-4 border-b">David Kadavy</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookAuthor}</td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Category</td>
-              <td className="py-2 px-4 border-b">Motivation</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookCategory}</td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Original Published</td>
-              <td className="py-2 px-4 border-b">Al Hera</td>
+              <td className="py-2 px-4 border-b">
+                {findBook?.originalPublisher}
+              </td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Audio</td>
-              <td className="py-2 px-4 border-b">Yes</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookAudio}</td>
             </tr>
             <tr>
               <td className="py-2 px-4 border-b">Language</td>
-              <td className="py-2 px-4 border-b">English</td>
+              <td className="py-2 px-4 border-b">{findBook?.bookLanguage}</td>
             </tr>
           </tbody>
         </table>

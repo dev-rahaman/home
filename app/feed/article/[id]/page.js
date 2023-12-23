@@ -1,34 +1,37 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import parse from "html-react-parser";
 
-const ArticleDetails = () => {
+const ArticleDetails = ({ params }) => {
+  // console.log(params.id);
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/article")
+    fetch("http://localhost:5000/article")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
       });
   }, []);
 
+  const findArticle = articles.find((item) => item._id === params.id);
+
   return (
     <>
-      {articles.map((item, idx) => (
-        <div key={idx} className="lg:space-y-6 my-10">
-          <h2 className="lg:text-3xl md:text-3xl text-2xl lg:font-bold ">
-            {item.title}
-          </h2>
-          <Image
-            src={"/image3.jpg"}
-            alt="blogs images"
-            width={5000}
-            height={5000}
-          />
-          <p>{item.content}</p>
-        </div>
-      ))}
+      <div className="lg:space-y-6  ">
+        <h2 className="lg:text-3xl md:text-3xl text-2xl lg:font-bold ">
+          {findArticle?.title}
+        </h2>
+        <Image
+          src={"/image3.jpg"}
+          // src={`${findArticle?.photo}`}
+          alt="blogs images"
+          width={5000}
+          height={5000}
+        />
+        <div>{parse(`${findArticle?.value}`)}</div>
+      </div>
     </>
   );
 };

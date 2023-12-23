@@ -10,7 +10,7 @@ const Article = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/article")
+    fetch("http://localhost:5000/article")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -31,7 +31,10 @@ const Article = () => {
               className="rounded md:w-full"
             />
             <div className="p-3 px-2">
-              <h2 className="uppercase">{item.title}</h2>
+              <h2 className="capitalize text-3xl font-bold">
+                {item.title.slice(0, 50)}
+                <b>&hellip;</b>
+              </h2>
               <div className="my-5 flex gap-4 text-sm">
                 <div className="flex gap-1">
                   <UserIcon /> <span>By administrator</span>
@@ -40,7 +43,14 @@ const Article = () => {
                   <UserIcon /> <span>{item.time}</span>
                 </div>
               </div>
-              <div>{parse(`${item.content.slice(0, 150)}<b>&hellip;</b>`)}</div>
+              <div className="inline">
+                {parse(
+                  `<div className="inlineContent">${item.value.slice(
+                    0,
+                    150
+                  )}<b>...</b></div>`
+                )}
+              </div>
               <Link
                 href={`/feed/article/${item._id}`}
                 className="mt-3 text-[#ea8b26]"

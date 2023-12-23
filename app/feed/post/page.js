@@ -37,7 +37,7 @@ const allPosts = [
 const Post = () => {
   // const [allPosts, setAllPosts] = useState([]);
   // useEffect(() => {
-  //   fetch("http://localhost:3001/home")
+  //   fetch("http://localhost:5000/home")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setAllPosts(data);

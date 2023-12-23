@@ -6,7 +6,7 @@ const Classes = () => {
   return (
     <>
       <Tags />
-      <div className="flex flex-wrap  gap-2 ms-5 mb-5 mt-14">
+      <div className="flex flex-wrap  gap-2 ms-5 mb-5 pt-14">
         <Link href={"/feed/classes/classDetails"}>
           <div className="relative w-[230px] h-[255px] bg-red-500 rounded overflow-hidden shadow-lg">
             <Image
