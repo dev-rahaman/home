@@ -127,3 +127,11 @@ tr:nth-child(even):hover {
 .inlineContent h6 {
   display: inline;
 }
+
+.btn {
+  background-color: #02a7c3;
+}
+
+.btn:hover {
+  background-color: #25454d;
+}

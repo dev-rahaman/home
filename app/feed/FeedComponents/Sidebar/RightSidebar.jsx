@@ -48,8 +48,8 @@ const RightSidebar = () => {
   };
 
   return (
-    <div className="left-sidebar w-[270px] p-4 pb-20  leading-6 h-screen overflow-x-auto custom-scrollbar ">
-      <ul className="bg-red-500 rounded space-y-3 py-3">
+    <div className="mt-16 eft-sidebar w-[270px] p-4 pb-20  leading-6 h-screen overflow-x-auto custom-scrollbar ">
+      <ul className="bg-[#00769C] rounded space-y-3 py-3">
         {allMadrasa.map((madrasa, idx) => (
           <li
             key={idx}
@@ -63,10 +63,10 @@ const RightSidebar = () => {
               className="rounded-full mr-2"
             />
             <div className="space-y-[3px]">
-              <h2 className="font-bold">{madrasa.name}</h2>
-              <p className="text-sm">{madrasa.title}</p>
+              <h2 className="font-bold text-white">{madrasa.name}</h2>
+              <p className="text-sm text-white">{madrasa.title}</p>
               <button
-                className="text-xl bg-red-950 text-white p-[4px] rounded-full w-[100px]"
+                className="text-[20px] btn text-white p-[4px] rounded-full w-[100px]"
                 onClick={() => handleFollow(idx)}
               >
                 {follow[idx] ? "Unfollow" : "Follow"}

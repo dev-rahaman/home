@@ -1,5 +1,5 @@
 "use client";
-import { DropdownIcon } from "@/app/icons/icons";
+import { DropdownIcon, SearchIcon } from "@/app/icons/icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -21,7 +21,7 @@ const FeedHeader = () => {
   };
   return (
     <div className="relative">
-      <nav className="z-50 w-full fixed  bg-[#0E6C14] text-white top-0 border-gray-200">
+      <nav className="z-50 w-full fixed  bg-[#00769C] text-white top-0 border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             href=""
@@ -63,46 +63,33 @@ const FeedHeader = () => {
               </svg>
               <span className="sr-only">Search</span>
             </button>
+
             <div className="relative hidden md:block">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-black"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+                <SearchIcon />
               </div>
               <input
                 type="text"
                 id="search-navbar"
-                className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg   focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full bg-[#00769C] p-2 ps-10 text-sm border border-gray-300 rounded-lg outline-none"
                 placeholder="Search..."
               />
             </div>
 
-            <div className="end-3 ms-2">
+            <div className="flex items-center">
               <button
                 onClick={handleDropdown}
-                className="p-[5px] text-white bg-gray-700 rounded flex items-center justify-between w-full"
+                className="p-[10px] text-white btn rounded flex items-center justify-between w-full"
               >
-                Select <DropdownIcon />
+                <DropdownIcon />
               </button>
             </div>
             {open && (
-              <ul className="w-[150px] h-[150px] z-50 space-y-4 bg-red-400 p-3 rounded absolute right-6  top-[52px]">
+              <ul className="w-[150px] h-[150px] z-50 space-y-4 bg-[#00769C] p-3 rounded absolute right-6  top-[52px]">
                 <li>
                   <a
                     href="#"
-                    className="text-black hover:text-blue-600 dark:hover:text-blue-500"
+                    className=" hover:text-blue-600 dark:hover:text-blue-500"
                   >
                     About Us
                   </a>
@@ -110,7 +97,7 @@ const FeedHeader = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-black hover:text-blue-600 dark:hover:text-blue-500"
+                    className="  hover:text-blue-600 dark:hover:text-blue-500"
                   >
                     Library
                   </a>
@@ -118,37 +105,13 @@ const FeedHeader = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-black hover:text-blue-600 dark:hover:text-blue-500"
+                    className=" hover:text-blue-600 dark:hover:text-blue-500"
                   >
                     Contact
                   </a>
                 </li>
               </ul>
             )}
-            {/* <button
-          data-collapse-toggle="navbar-search"
-          type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-blacken hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-search"
-          aria-expanded="false"
-        >
-          <span className="sr-only">Open main menu</span>
-          <svg
-            className="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
-        </button> */}
           </div>
           <div
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"

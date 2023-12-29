@@ -1,7 +1,41 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const VideoDetails = () => {
+const VideoDetails = ({ params }) => {
+  const [videos, setVideos] = useState([]);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/video")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos(data);
+      });
+  }, []);
+
+  const findVideo = videos.find((item) => item._id === params.id);
+
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const getDescriptionToShow = () => {
+    const fullDescription = findVideo?.description;
+    const maxLength = 150;
+
+    if (
+      showFullDescription ||
+      !fullDescription ||
+      fullDescription.length <= maxLength
+    ) {
+      return fullDescription;
+    }
+
+    return `${fullDescription.slice(0, maxLength)}...`;
+  };
+
   return (
     <div className="lg:space-y-6 my-10">
       <div>
@@ -13,10 +47,20 @@ const VideoDetails = () => {
           allowfullscreen
           style={{ width: "740px", height: "400px" }}
         ></iframe>
-        <h2 className="text-2xl mt-2">
-          Usually a Python function passes its results back using a return
-          statement.
-        </h2>
+        <div className="mt-2 bg-gray-200 p-2 rounded">
+          <h2 className="text-2xl mt-2">{findVideo?.writeTittle}</h2>
+          <div>
+            <p className="pt-4">{getDescriptionToShow()}</p>
+            {findVideo?.description && findVideo?.description.length > 200 && (
+              <>
+                <p className="py-3">{findVideo?.tags}</p>
+                <button onClick={toggleDescription} className="text-green-600">
+                  {showFullDescription ? "Show less" : "Show more"}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2 my-5">

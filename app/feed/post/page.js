@@ -1,92 +1,258 @@
 "use client";
 import React, { useState } from "react";
 import { CloseIcon, CommentIcon, LoveIcon, ShearIcon } from "@/app/icons/icons";
+import parse from "html-react-parser";
+import FetchData from "../FeedComponents/SmallComponents/FetchData";
+import Link from "next/link";
 import Image from "next/image";
 
-const allPosts = [
-  {
-    id: "1",
-    user: {
-      avatar:
-        "https://seeklogo.com/images/O/of-markajululum-mahila-madrasa-logo-44BAC337AA-seeklogo.com.png",
-      name: "Jamia Rashida Madrasa",
-      date: "11/16/23",
-    },
-    content:
-      "It looks like you're trying to create a list of posts and provide a button to close each post based on its ID. However, in your current implementation, the toggleVisibility function is using a single state (isVisible) for all posts. To achieve per-post visibility, you should manage the visibility state for each post separately.",
-    like: "2446",
-    comment: "120",
-    share: "53",
-  },
-  {
-    id: "2",
-    user: {
-      avatar:
-        "https://seeklogo.com/images/O/of-markajululum-mahila-madrasa-logo-44BAC337AA-seeklogo.com.png",
-      name: "Jamia Rashida Madrasa",
-      date: "11/16/23",
-    },
-    content:
-      "To create a simple cart using JSX and Tailwind CSS for posting on social media, you can use the following code as a starting point. Make sure you have Tailwind CSS installed and properly configured in your project. To create a simple cart using JSX and Tailwind CSS for posting on social media, you can use the following code as a To create a simple cart using JSX and Tailwind CSS for posting on social media, you can use the following code as a starting point. Make sure you have Tailwind CSS installed and properly configured in your project. To create a simple cart using JSX and Tailwind CSS for posting on social media, you can use the following code as a",
-    like: "2486",
-    comment: "64",
-    share: "23",
-  },
-];
-
 const Post = () => {
-  // const [allPosts, setAllPosts] = useState([]);
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/home")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setAllPosts(data);
-  //     });
-  // }, []);
+  const [article, setArticle] = useState([]);
+  const [notice, setNotice] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [video, setVideo] = useState([]);
+  const [photo, setPhoto] = useState([]);
+  const [event, setEvent] = useState([]);
+  const [book, setBook] = useState([]);
 
-  const [visiblePosts, setVisiblePosts] = useState(
-    allPosts.map((post) => post.id)
-  );
-
-  const toggleVisibility = (id) => {
-    setVisiblePosts((prevVisiblePosts) =>
-      prevVisiblePosts.includes(id)
-        ? prevVisiblePosts.filter((postId) => postId !== id)
-        : [...prevVisiblePosts, id]
-    );
+  const handleArticleFetched = (data) => {
+    setArticle(data);
+  };
+  const handleNoticeFetched = (data) => {
+    setNotice(data);
+  };
+  const handleClassesFetched = (data) => {
+    setClasses(data);
+  };
+  const handleVideoFetched = (data) => {
+    setVideo(data);
+  };
+  const handlePhotoFetched = (data) => {
+    setPhoto(data);
+  };
+  const handleEventFetched = (data) => {
+    setEvent(data);
+  };
+  const handleBookFetched = (data) => {
+    setBook(data);
   };
 
   return (
-    <div className="space-y-6 mt-5">
-      {allPosts.map((post) => (
+    <div className="space-y-6 my-5">
+      <FetchData endPoint="article" setData={handleArticleFetched} />
+      <FetchData endPoint="notice" setData={handleNoticeFetched} />
+      <FetchData endPoint="class" setData={handleClassesFetched} />
+      <FetchData endPoint="video" setData={handleVideoFetched} />
+      <FetchData endPoint="photo" setData={handlePhotoFetched} />
+      <FetchData endPoint="event" setData={handleEventFetched} />
+      <FetchData endPoint="book" setData={handleBookFetched} />
+
+      {/* article */}
+      {article.map((post, idx) => (
         <div
-          key={post.id}
-          className={`max-w-bg-white p-4 shadow-lg rounded-lg flex flex-col ${
-            visiblePosts.includes(post.id) ? "" : "hidden"
-          }`}
+          key={idx}
+          className={`max-w-bg-white p-4 shadow-lg rounded-lg flex flex-col bg-gray-200`}
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center">
-              <Image
-                width={80}
-                height={80}
-                src={post.user.avatar}
-                alt="Profile"
-                className="w-8 h-8 rounded-full mr-2"
-              />
-              <div>
+          <div className="flex items-center justify-between mb-4 ">
+            <div className="flex items-center ">
+              {/* <div>
                 <h2>{post.user.name}</h2>
                 <p className="text-gray-700 text-sm">{post.user.date}</p>
-              </div>
+              </div> */}
             </div>
             <button
-              onClick={() => toggleVisibility(post.id)}
+              onClick={() => toggleVisibility(post._id)}
               className="text-gray-500 hover:text-gray-700 focus:outline-none"
             >
               <CloseIcon />
             </button>
           </div>
-          <div className="">{post.content}</div>
+          <div>
+            <h2 className="text-2xl font-bold">{post.title}</h2>
+          </div>
+          <div>
+            {parse(`<div className="inlineContent">${post.value}</div>`)}
+          </div>
+          <p>{post.tags}</p>
+          <div className="flex justify-between mt-5  border-y-2 py-2">
+            <div className="flex items-center flex-col">
+              <p>{post.like}</p>
+              <button className="block">
+                <LoveIcon />
+              </button>
+            </div>
+            <div className="flex items-center flex-col">
+              <p>{post.comment}</p>
+              <button className="block">
+                <CommentIcon />
+              </button>
+            </div>
+            <div className="flex items-center flex-col">
+              <p>{post.share}</p>
+              <button className="block">
+                <ShearIcon />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* notice  */}
+      {notice.map((notice, idx) => (
+        <div
+          key={idx}
+          className={`max-w-bg-white p-4 shadow-lg rounded-lg flex flex-col bg-gray-200`}
+        >
+          <div className="flex items-center justify-between mb-4 ">
+            <div className="flex items-center ">
+              {/* <div>
+                <h2>{post.user.name}</h2>
+                <p className="text-gray-700 text-sm">{post.user.date}</p>
+              </div> */}
+            </div>
+            <button
+              onClick={() => toggleVisibility(notice._id)}
+              className="text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <CloseIcon />
+            </button>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold">{notice.title}</h2>
+          </div>
+          <div>
+            {parse(`<div className="inlineContent">${notice.value}</div>`)}
+          </div>
+          <p>{notice.tags}</p>
+          <div className="flex justify-between mt-5  border-y-2 py-2">
+            <div className="flex items-center flex-col">
+              <p>{notice.like}</p>
+              <button className="block">
+                <LoveIcon />
+              </button>
+            </div>
+            <div className="flex items-center flex-col">
+              <p>{notice.comment}</p>
+              <button className="block">
+                <CommentIcon />
+              </button>
+            </div>
+            <div className="flex items-center flex-col">
+              <p>{notice.share}</p>
+              <button className="block">
+                <ShearIcon />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* class */}
+      <div className="flex flex-wrap  gap-2 ms-5 mb-5 pt-14">
+        {classes.map((notice, idx) => (
+          <Link href={"/feed/classes/classDetails"} key={idx}>
+            <div className="relative w-[230px] h-[255px] bg-red-500 rounded overflow-hidden shadow-lg">
+              <Image
+                width={230}
+                height={195}
+                src="/class.png"
+                alt="Video Thumbnail"
+                className="w-[240px] h-[130px]"
+              />
+              <span className="absolute top-[6.50rem] right-0 bg-black text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded">
+                27: 51
+              </span>
+              <div className="mt-2 flex px-1 justify-center">
+                <Image
+                  width={30}
+                  height={30}
+                  src="/profile-image.jpg"
+                  alt="Profile"
+                  className="h-12 w-12 rounded-full mx-auto"
+                />
+                <div className="ml-3">
+                  <span className="text-center text-sm">
+                    Search any image with Google Lens Search any image with
+                    Google Lens
+                  </span>
+                  <p className="text-gray-800 text-sm">Dev-Rahaman</p>
+                  <div className="flex text-sm">
+                    <p className="text-gray-800">Views: 1M&nbsp;•&nbsp;</p>
+                    <p className="text-gray-800">1 Day Ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Video */}
+      <div className="flex flex-wrap  gap-2 ms-5 mb-5 pt-14">
+        {video.map((notice, idx) => (
+          <Link href={"/feed/classes/classDetails"} key={idx}>
+            <div className="relative w-[230px] h-[255px] bg-red-500 rounded overflow-hidden shadow-lg">
+              <Image
+                width={230}
+                height={195}
+                src="/class.png"
+                alt="Video Thumbnail"
+                className="w-[240px] h-[130px]"
+              />
+              <span className="absolute top-[6.50rem] right-0 bg-black text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded">
+                27: 51
+              </span>
+              <div className="mt-2 flex px-1 justify-center">
+                <Image
+                  width={30}
+                  height={30}
+                  src="/profile-image.jpg"
+                  alt="Profile"
+                  className="h-12 w-12 rounded-full mx-auto"
+                />
+                <div className="ml-3">
+                  <span className="text-center text-sm">
+                    Search any image with Google Lens Search any image with
+                    Google Lens
+                  </span>
+                  <p className="text-gray-800 text-sm">Dev-Rahaman</p>
+                  <div className="flex text-sm">
+                    <p className="text-gray-800">Views: 1M&nbsp;•&nbsp;</p>
+                    <p className="text-gray-800">1 Day Ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {photo.map((post, idx) => (
+        <div
+          key={idx}
+          className={`max-w-bg-white p-4 shadow-lg rounded-lg flex flex-col bg-gray-200`}
+        >
+          <div className="flex items-center justify-between mb-4 ">
+            <div className="flex items-center ">
+              {/* <div>
+                <h2>{post.user.name}</h2>
+                <p className="text-gray-700 text-sm">{post.user.date}</p>
+              </div> */}
+            </div>
+            <button
+              onClick={() => toggleVisibility(post._id)}
+              className="text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <CloseIcon />
+            </button>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold">{post.title}</h2>
+          </div>
+          <div>
+            {parse(`<div className="inlineContent">${post.value}</div>`)}
+          </div>
+          <p>{post.tags}</p>
           <div className="flex justify-between mt-5  border-y-2 py-2">
             <div className="flex items-center flex-col">
               <p>{post.like}</p>
