@@ -21,7 +21,7 @@ const Article = () => {
     <>
       <Tags />
       {articles.map((item, idx) => (
-        <div key={idx} className="mt-14 ms-36 space-y-10">
+        <div key={idx} className=" mt-14 lg:ms-36 ms-[250px] space-y-10">
           <div className="lg:w-[500px] lg:h-[560px] rounded border-b border-[#ea8b26]">
             <Image
               src={"/image3.jpg"}

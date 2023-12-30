@@ -8,14 +8,15 @@ import {
   EditIcon,
   EventIcon,
   ExploreIcon,
-  HistoryIcon,
   HomeIcon,
   NoticeIcon,
   NotificationIcon,
   PhotoIcon,
-  ShortIcon,
   VideoIcon,
 } from "@/app/icons/icons";
+import { MdHistory } from "react-icons/md";
+import { SiYoutubeshorts } from "react-icons/si";
+
 import { useState } from "react";
 
 const menus = [
@@ -50,7 +51,7 @@ const menus = [
   {
     name: "শর্ট",
     link: "/feed/short",
-    icon: <ShortIcon />,
+    icon: <SiYoutubeshorts />,
   },
   {
     name: "ভিডিও",
@@ -90,7 +91,7 @@ const menus = [
   {
     name: "হিস্টোরি",
     link: "/feed/history",
-    icon: <HistoryIcon />,
+    icon: <MdHistory />,
   },
 ];
 
@@ -99,10 +100,11 @@ export const Item = ({ name, link, icon }) => {
     <li>
       <Link
         href={link}
-        className="flex items-center p-2 text-[18px] hover:bg-[#9ab2003f] rounded-lg group"
+        className="flex items-center p-2 text-[18px] rounded-lg group transition hover:bg-[#25454d] hover:text-white"
       >
         <div className="me-2">{icon}</div>
-        {name}
+
+        <span className="hidden sm:inline">{name}</span>
       </Link>
     </li>
   );
@@ -116,30 +118,42 @@ const DropdownMenu = ({ title, icon, dropdownItems }) => {
   };
 
   return (
-    <li>
-      <div
-        className="flex items-center w-full p-2 pl-0 text-[18px] cursor-pointer hover:bg-[#9ab2003f] ps-2 text-base transition duration-75 rounded-lg group"
-        onClick={toggleDropdown}
-      >
-        <div className="me-2">{icon}</div>
-        <div className="w-full flex items-center">
-          {title}
-          <div className="ms-5 flex items-center justify-center w-[25px] h-[25px] rounded-full bg-gray-300">
-            <DropdownIcon />
+    <>
+      <li className="hidden lg:block">
+        <div
+          className="hover:bg-[#25454d] hover:text-white flex items-center w-full p-2 pl-0 text-[18px] cursor-pointer ps-2 text-base transition duration-75 rounded-lg group"
+          onClick={toggleDropdown}
+        >
+          <div className="me-2">{icon}</div>
+          <div className="w-full flex items-center">
+            {title}
+            <div className="ms-5 flex items-center justify-center w-[25px] h-[25px] rounded-full bg-gray-300">
+              <DropdownIcon />
+            </div>
           </div>
         </div>
-      </div>
 
-      {isOpen && (
-        <ul className="ms-4">
+        {isOpen && (
+          <ul className="ms-4">
+            {dropdownItems.map((item, idx) => (
+              <div key={idx}>
+                <Item {...item} />
+              </div>
+            ))}
+          </ul>
+        )}
+      </li>
+
+      <li className="lg:hidden block">
+        <ul className="">
           {dropdownItems.map((item, idx) => (
             <div key={idx}>
               <Item {...item} />
             </div>
           ))}
         </ul>
-      )}
-    </li>
+      </li>
+    </>
   );
 };
 
@@ -148,7 +162,7 @@ const LeftSidebar = () => {
 
   return (
     <ul
-      className={`mt-16 left-sidebar w-[270px] p-4 pb-20 leading-6 h-screen overflow-x-auto custom-scrollbar ${
+      className={`mt-16 left-sidebar lg:w-[270px] w-[60px] py-4 px-1 pb-20 leading-6 h-screen overflow-x-auto custom-scrollbar ${
         isHovered ? "show-scrollbar" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}

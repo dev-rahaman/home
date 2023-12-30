@@ -48,8 +48,8 @@ const RightSidebar = () => {
   };
 
   return (
-    <div className="mt-16 eft-sidebar w-[270px] p-4 pb-20  leading-6 h-screen overflow-x-auto custom-scrollbar ">
-      <ul className="bg-[#00769C] rounded space-y-3 py-3">
+    <div className="hidden lg:block md:block mt-16 eft-sidebar w-[270px] p-4 pb-20  leading-6 h-screen overflow-x-auto custom-scrollbar ">
+      <ul className="custom-bg rounded space-y-3 py-3">
         {allMadrasa.map((madrasa, idx) => (
           <li
             key={idx}

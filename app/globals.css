@@ -7,25 +7,6 @@ html {
   scroll-snap-type: y mandatory;
 }
 
-/* shorts */
-/* .short-container::-webkit-scrollbar {
-  display: none;
-} */
-
-/* .short-container {
-  width: 700px;
-  height: 82vh;
-  overflow: scroll;
-  scroll-snap-type: y mandatory;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow: none;
-}
-
-.short {
-  scroll-snap-align: start;
-} */
-
 .custom-rounded {
   border-radius: 50px 0 50px 0;
 }
@@ -83,14 +64,15 @@ option:nth-child(odd) {
 }
 
 .custom-bg {
-  background-color: #0e6c14;
+  background-color: #00769c;
 }
 
 .custom-text {
+  transition: 0.5s;
   color: #fff;
 }
 .custom-text:hover {
-  color: #9bb200;
+  color: #25454d;
 }
 
 /* notifications */
@@ -130,8 +112,13 @@ tr:nth-child(even):hover {
 
 .btn {
   background-color: #02a7c3;
+  transition: 0.5s;
 }
 
 .btn:hover {
   background-color: #25454d;
+}
+
+.hoverColor {
+  color: #25454d;
 }

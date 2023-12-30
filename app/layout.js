@@ -14,13 +14,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gray-100`}>
         <FeedHeader />
-        <div className="w-full main flex justify-between  bg-gray-100">
+        <div className="w-full main flex justify-between">
           <div className="fixed left-0">
             <LeftSidebar />
           </div>
-          <div className="mx-[270px] px-10 mt-10 pt-10">{children}</div>
+          <div className="lg:mx-[270px] px-10 mt-10 pt-10">{children}</div>
           <div className="fixed right-0">
             <RightSidebar />
           </div>
