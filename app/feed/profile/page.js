@@ -2,8 +2,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const Profile = () => {
-  redirect("/home/madrasapage", "replace");
-  return <div></div>;
+  return <div>Profile</div>;
 };
 
 export default Profile;

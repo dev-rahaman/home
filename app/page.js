@@ -4,8 +4,8 @@ import Reels from "./feed/reels/page";
 const Feed = () => {
   return (
     <div>
-      <Reels />
-      <Post />
+      {/* <Reels />
+      <Post /> */}
     </div>
   );
 };
